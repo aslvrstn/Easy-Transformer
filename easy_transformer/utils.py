@@ -13,7 +13,6 @@ from torchtyping import TensorType as TT
 import transformers
 from huggingface_hub import hf_hub_download
 import re
-from functools import lru_cache
 from rich import print as rprint
 
 CACHE_DIR = transformers.TRANSFORMERS_CACHE
@@ -583,7 +582,6 @@ class FactoredMatrix:
     def T(self) -> FactoredMatrix:
         return FactoredMatrix(self.B.transpose(-2, -1), self.A.transpose(-2, -1))
 
-    @lru_cache(maxsize=None)
     def svd(
         self,
     ) -> Tuple[
